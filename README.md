@@ -29,7 +29,7 @@ npm test
 
 ```
 
-# 集成 vuex  mint-ui  scss  mockjs 全局过滤器 全局工具 封装axios rem(设置了函数) 模板功能
+# 测试书写胖子给的拼团
 
 ```
 
