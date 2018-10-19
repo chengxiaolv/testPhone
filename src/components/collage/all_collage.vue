@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li>
+      <li @click="collageing">
         <img src="../../../static/images/img-1@2x.png" alt="" srcset="">
         <p class="timeTips">
           <span class="fl">拼团</span>
@@ -31,7 +31,7 @@
           <span class="stateColor">去开团</span>
         </div>
       </li>
-      <li>
+      <li @click="alreadyBought">
         <img src="../../../static/images/img-2@2x.png" alt="" srcset="">
         <div class="CommodityDetailS">乙烯利芒果，4人团5斤仅需39</div>
         <div class="statusTips">
@@ -73,7 +73,13 @@
         this.$router.push('/no_beginning_collage/'+ 3 + '_' + 0); //跳转未开始商品详情页面
       },
       FinishedCcollage(){ //结束商品详情
-        this.$router.push('/Finished_collage/'+ 3 + '_' + 0); //跳转未开始商品详情页面
+        this.$router.push('/Finished_collage/'+ 3 + '_' + 0); //跳转结束商品详情页面
+      },
+      alreadyBought(){ //已售罄商品详情
+        this.$router.push('/already_bought/'+ 3 + '_' + 0); //跳转已售罄商品详情页面
+      },
+      collageing(){ //正在拼团商品详情
+        this.$router.push('/collageing/'+ 3 + '_' + 0); //跳转已售罄商品详情页面
       }
     }
   }

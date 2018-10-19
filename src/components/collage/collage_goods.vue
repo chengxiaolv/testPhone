@@ -15,7 +15,7 @@
   export default {
     data () {
       return {
-      activeTab: 'AllCollages'
+        activeTab: 'AllCollages'
       }
     },
     methods:{

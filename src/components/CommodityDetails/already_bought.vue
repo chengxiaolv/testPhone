@@ -36,7 +36,7 @@
     </div>
     <div class="line"></div>
     <div class="Describe">
-      拼团活动已结束，不能参加拼团
+      拼团活动已售罄
     </div>
     <div class="line"></div>
     <div class="DistributionMode">
@@ -76,7 +76,7 @@
       <span>商品详情</span>
     </div>
     <div class="status">
-      已结束
+      已售罄
     </div>
   </div>
 </template>

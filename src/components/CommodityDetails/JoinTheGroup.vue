@@ -39,9 +39,9 @@
       拼团活动已结束，不能参加拼团
     </div>
     <div class="line"></div>
-    <div class="DistributionMode">
+    <div class="DistributionMode" @click="DistributionMode">
       <span class="fl">配送方式：</span>
-      <span class="fl">自提</span>
+      <span class="fl">{{DistributionModeTitle}}</span>
       <span class="fr">></span>
     </div>
     <div class="address clearfix">
@@ -78,6 +78,13 @@
     <div class="status">
       已结束
     </div>
+
+    <mt-actionsheet
+      :actions="actions"
+      cancelText = ''
+      v-model="sheetVisible">
+    </mt-actionsheet>
+
   </div>
 </template>
 
@@ -85,20 +92,41 @@
   export default {
     data () {
       return {
-
+        actions:[],
+        sheetVisible: false,
+        DistributionModeTitle: '自提'
       }
     },
     methods:{
 
     },
     created(){
-
+      var self = this;
+      this.actions = [
+        {
+          name: '配送方式'
+        },
+        {
+          name: '自提',
+          method(){
+            self.DistributionModeTitle = '自提';
+          }
+        },
+        {
+          name: '本地派送',
+          method(){
+            self.DistributionModeTitle = '本地派送';
+          }
+        }
+      ]
     },
     watch:{
 
     },
     components:{
-
+      DistributionMode(){ //选择配送方式
+        this.sheetVisible = true;
+      },
     }
   }
 </script>
