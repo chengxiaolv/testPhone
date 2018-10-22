@@ -22,3 +22,47 @@ const produceNewsData = function() {
 };
 // Mock.mock( url, post/get , 返回的数据)；
 Mock.mock('/news/index', 'post', produceNewsData);
+
+
+// 所有拼团
+const allCollage = function() {
+    let articles = [{
+        img: Random.dataImage('200x100', '天堂'),
+        status: 0,
+        time: '60000',
+        CommodityDescription: Random.csentence(6, 10),
+        people: 5,
+        PresentPrice: 99,
+        OriginalPrice: 159,
+        id: 0
+    }, {
+        img: Random.dataImage('200x100', '天堂'),
+        status: 1,
+        CommodityDescription: Random.csentence(6, 10),
+        people: 3,
+        PresentPrice: 49,
+        OriginalPrice: 89,
+        id: 1
+    }, {
+        img: Random.dataImage('200x100', '天堂'),
+        status: 2,
+        CommodityDescription: Random.csentence(6, 10),
+        people: 2,
+        PresentPrice: 9,
+        OriginalPrice: 59,
+        id: 2
+    }, {
+        img: Random.dataImage('200x100', '天堂'),
+        status: 3,
+        CommodityDescription: Random.csentence(6, 10),
+        people: 8,
+        PresentPrice: 999,
+        OriginalPrice: 1059,
+        id: 3
+    }];
+    return {
+        articles: articles
+    }
+};
+// Mock.mock( url, post/get , 返回的数据)；
+Mock.mock('/allCollage', 'post', allCollage);

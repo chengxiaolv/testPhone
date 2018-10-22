@@ -24,13 +24,13 @@
       }
     },
     created(){
-      this.https.post("/news/index")
-      .then((res)=>{
-        console.log(res)
-      })
-      .catch((res)=>{
-        console.log(res)
-      })
+      // this.https.post("/news/index")
+      // .then((res)=>{
+      //   console.log(res)
+      // })
+      // .catch((res)=>{
+      //   console.log(res)
+      // })
     },
     watch:{
 

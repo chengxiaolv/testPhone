@@ -1,7 +1,32 @@
 <template>
   <div>
     <ul>
-      <li @click="collageing">
+      <li v-for="(item,index) in data" :key="index" @click="text(item)">
+        <img :src="item.img" alt="" srcset="">
+        <p class="timeTips" v-if="item.status == 0 ? true : false">
+          <span class="fl">拼团</span>
+          <span class="fr">
+            <span>剩余时间：</span>
+            <span>07天06时22分30秒</span>
+          </span>
+        </p>
+        <div class="statusTips" v-if="item.status == 0 ? false : true">
+          <span v-if="item.status == 1 ? true : false">已结束</span>
+          <span v-if="item.status == 2 ? true : false">已售罄</span>
+          <span v-if="item.status == 3 ? true : false">未开始</span>
+        </div>
+        <div class="CommodityDetailS">{{item.CommodityDescription}}</div>
+        <div class="CommodityState">
+          <span>{{item.people}}人团</span>
+          <span>￥{{item.PresentPrice}}</span>
+          <span>单买价:￥{{item.OriginalPrice}}</span>
+          <span v-if="item.status == 0 ? true : false">去开团</span>
+          <span class="stateColor" v-if="item.status == 0 ? false : true">去开团</span>
+        </div>
+      </li>
+
+
+      <!-- <li @click="collageing">
         <img src="../../../static/images/img-1@2x.png" alt="" srcset="">
         <p class="timeTips">
           <span class="fl">拼团</span>
@@ -56,7 +81,64 @@
           <span>单买价:￥159</span>
           <span class="stateColor">未开始</span>
         </div>
+      </li> -->
+
+      <!-- <li @click="collageing">
+        <img src="../../../static/images/img-1@2x.png" alt="" srcset="">
+        <p class="timeTips">
+          <span class="fl">拼团</span>
+          <span class="fr">
+            <span>剩余时间：</span>
+            <span>07天06时22分30秒</span>
+          </span>
+        </p>
+        <div class="CommodityDetailS">中华红荔枝，5人团10斤仅需99元</div>
+        <div class="CommodityState">
+          <span>5人团</span>
+          <span>￥99</span>
+          <span>单买价:￥159</span>
+          <span>去开团</span>
+        </div>
       </li>
+      <li @click="FinishedCcollage">
+        <img src="../../../static/images/img-2@2x.png" alt="" srcset="">
+        <div class="CommodityDetailS">乙烯利芒果，4人团5斤仅需39</div>
+        <div class="statusTips">
+          <span>已结束</span>
+        </div>
+        <div class="CommodityState">
+          <span>4人团</span>
+          <span>￥99</span>
+          <span>单买价:￥159</span>
+          <span class="stateColor">去开团</span>
+        </div>
+      </li>
+      <li @click="alreadyBought">
+        <img src="../../../static/images/img-2@2x.png" alt="" srcset="">
+        <div class="CommodityDetailS">乙烯利芒果，4人团5斤仅需39</div>
+        <div class="statusTips">
+          <span>已售罄</span>
+        </div>
+        <div class="CommodityState">
+          <span>4人团</span>
+          <span>￥99</span>
+          <span>单买价:￥159</span>
+          <span class="stateColor">去开团</span>
+        </div>
+      </li>
+      <li @click="NotBeginning">
+        <img src="../../../static/images/img-2@2x.png" alt="" srcset="">
+        <div class="CommodityDetailS">乙烯利芒果，4人团5斤仅需39</div>
+        <div class="statusTips">
+          <span>未开始</span>
+        </div>
+        <div class="CommodityState">
+          <span>4人团</span>
+          <span>￥99</span>
+          <span>单买价:￥159</span>
+          <span class="stateColor">未开始</span>
+        </div>
+      </li> -->
     </ul>
   </div>
 </template>
@@ -65,22 +147,48 @@
   export default {
     data(){
       return{
-        
+        data: []
       }
     },
     methods:{
-      NotBeginning(){ //未开始商品详情
-        this.$router.push('/no_beginning_collage/'+ 3 + '_' + 0); //跳转未开始商品详情页面
+      init(){  //初始化渲染项目
+        this.https.post("/allCollage")
+        .then((res)=>{
+          console.log(res)
+          this.data = res.articles;
+          console.log(this.data)
+        })
+        .catch((res)=>{
+          console.log(res)
+        })
       },
-      FinishedCcollage(){ //结束商品详情
-        this.$router.push('/Finished_collage/'+ 3 + '_' + 0); //跳转结束商品详情页面
-      },
-      alreadyBought(){ //已售罄商品详情
-        this.$router.push('/already_bought/'+ 3 + '_' + 0); //跳转已售罄商品详情页面
-      },
-      collageing(){ //正在拼团商品详情
-        this.$router.push('/collageing/'+ 3 + '_' + 0); //跳转已售罄商品详情页面
+      // NotBeginning(){ //未开始商品详情
+      //   this.$router.push('/no_beginning_collage/'+ 3 + '_' + 0); //跳转未开始商品详情页面
+      // },
+      // FinishedCcollage(){ //结束商品详情
+      //   this.$router.push('/Finished_collage/'+ 3 + '_' + 0); //跳转结束商品详情页面
+      // },
+      // alreadyBought(){ //已售罄商品详情
+      //   this.$router.push('/already_bought/'+ 3 + '_' + 0); //跳转已售罄商品详情页面
+      // },
+      // collageing(){ //正在拼团商品详情
+      //   this.$router.push('/collageing/'+ 3 + '_' + 0); //跳转已售罄商品详情页面
+      // },
+
+      text(item){
+        if(item.status == 0){
+          this.$router.push('/collageing/'+ item.id); //跳转未开始商品详情页面
+        }else if(item.status == 1){
+          this.$router.push('/Finished_collage/'+ item.id); //跳转结束商品详情页面
+        }else if(item.status == 2){
+          this.$router.push('/already_bought/'+ item.id); //跳转已售罄商品详情页面
+        }else if(item.status == 3){
+          this.$router.push('/no_beginning_collage/'+ item.id); //跳转已售罄商品详情页面
+        }
       }
+    },
+    created(){
+      this.init();
     }
   }
 </script>
